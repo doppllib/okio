@@ -26,7 +26,6 @@ import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.security.InvalidKeyException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import javax.annotation.Nullable;
@@ -152,11 +151,7 @@ public class ByteString implements Serializable, Comparable<ByteString> {
   }
 
   private ByteString digest(String algorithm) {
-    try {
-      return ByteString.of(MessageDigest.getInstance(algorithm).digest(data));
-    } catch (NoSuchAlgorithmException e) {
-      throw new AssertionError(e);
-    }
+      return ByteString.of(new MessageDigest(algorithm).digest(data));
   }
 
   /** Returns the 160-bit SHA-1 HMAC of this byte string. */

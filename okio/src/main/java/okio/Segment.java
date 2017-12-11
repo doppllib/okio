@@ -15,6 +15,7 @@
  */
 package okio;
 
+import com.google.j2objc.annotations.Weak;
 import javax.annotation.Nullable;
 
 /**
@@ -57,6 +58,7 @@ final class Segment {
   Segment next;
 
   /** Previous segment in a circularly-linked list. */
+  @Weak
   Segment prev;
 
   Segment() {

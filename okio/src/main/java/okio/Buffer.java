@@ -21,7 +21,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.security.InvalidKeyException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1566,8 +1565,7 @@ public final class Buffer implements BufferedSource, BufferedSink, Cloneable {
   }
 
   private ByteString digest(String algorithm) {
-    try {
-      MessageDigest messageDigest = MessageDigest.getInstance(algorithm);
+      MessageDigest messageDigest = new MessageDigest(algorithm);
       if (head != null) {
         messageDigest.update(head.data, head.pos, head.limit - head.pos);
         for (Segment s = head.next; s != head; s = s.next) {
@@ -1575,9 +1573,6 @@ public final class Buffer implements BufferedSource, BufferedSink, Cloneable {
         }
       }
       return ByteString.of(messageDigest.digest());
-    } catch (NoSuchAlgorithmException e) {
-      throw new AssertionError();
-    }
   }
 
   /** Returns the 160-bit SHA-1 HMAC of this buffer. */

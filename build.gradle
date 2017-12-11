@@ -1,0 +1,32 @@
+
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    def doppl_gradle_version = doppl_gradle
+    repositories {
+        jcenter()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url dopplMavenDeploy }
+        maven { url dopplRepo }
+    }
+    dependencies {
+        classpath 'net.ltgt.gradle:gradle-apt-plugin:0.9'
+        classpath "co.doppl:gradle:${doppl_gradle_version}"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        maven { url dopplMavenDeploy }
+        maven { url dopplRepo }
+    }
+}
+
+subprojects{
+    group = 'co.doppl.com.squareup.okio'
+    version = doppl_okio_doppl
+    ext.bintrayGitUrl = 'https://github.com/doppllib/okio.git'
+    ext.javaCoreVersion = doppl_core_java
+    ext.dopplCoreVersion = doppl_core_doppl
+}

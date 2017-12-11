@@ -17,7 +17,6 @@ package okio;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -69,12 +68,8 @@ public final class HashingSource extends ForwardingSource {
 
   private HashingSource(Source source, String algorithm) {
     super(source);
-    try {
-      this.messageDigest = MessageDigest.getInstance(algorithm);
-      this.mac = null;
-    } catch (NoSuchAlgorithmException e) {
-      throw new AssertionError();
-    }
+    this.messageDigest = new MessageDigest(algorithm);
+    this.mac = null;
   }
 
   private HashingSource(Source source, ByteString key, String algorithm) {

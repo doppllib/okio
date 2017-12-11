@@ -17,7 +17,6 @@ package okio;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.annotation.Nullable;
 import javax.crypto.Mac;
@@ -82,12 +81,8 @@ public final class HashingSink extends ForwardingSink {
 
   private HashingSink(Sink sink, String algorithm) {
     super(sink);
-    try {
-      this.messageDigest = MessageDigest.getInstance(algorithm);
-      this.mac = null;
-    } catch (NoSuchAlgorithmException e) {
-      throw new AssertionError();
-    }
+    this.messageDigest = new MessageDigest(algorithm);
+    this.mac = null;
   }
 
   private HashingSink(Sink sink, ByteString key, String algorithm) {

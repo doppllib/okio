@@ -19,8 +19,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -67,7 +65,7 @@ public final class OkioTest {
     source.close();
   }
 
-  @Test public void readWritePath() throws Exception {
+  /*@Test public void readWritePath() throws Exception {
     Path path = temporaryFolder.newFile().toPath();
 
     BufferedSink sink = Okio.buffer(Okio.sink(path));
@@ -79,7 +77,7 @@ public final class OkioTest {
     BufferedSource source = Okio.buffer(Okio.source(path));
     assertEquals("Hello, java.nio file!", source.readUtf8());
     source.close();
-  }
+  }*/
 
   @Test public void sinkFromOutputStream() throws Exception {
     Buffer data = new Buffer();

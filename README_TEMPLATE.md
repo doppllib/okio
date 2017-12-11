@@ -11,7 +11,7 @@ nio support in J2objc.
 ```groovy
 dependencies {
     compile 'com.squareup.okio:okio:1.13.0'
-    doppl 'co.doppl.com.squareup.okio:okio:1.13.0.0'
+    doppl '{{GROUP}}:okio:{{VERSION}}'
 }
 ```
 
